@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace fuckAgain
 {
-    public partial class UserControl1 : UserControl
+    public partial class tovar : UserControl
     {
         public string name_tovar { get; set; }
         public string edinic_izm { get; set; }
@@ -23,22 +23,39 @@ namespace fuckAgain
         public int quantity { get; set; }
         public string description { get; set; }
         //public string photo { get; set; }
-
-        public UserControl1()
+        public string roleName { get; set; }
+        public tovar(string roleName)
         {
             InitializeComponent();
+            if (roleName != "Администратор")
+            {
+                button1.Visible = false;
+                button2.Visible = false;
+            }
+
+            this.roleName = roleName;
         }
         public void Labels()
         {
-            label1.Text = "Наименование: " + name_tovar + "   |   " ;
+            label1.Text = "Категория: " + category + "   |   " +"Наименование: " + name_tovar;
             label2.Text = "Описание товара: " + description;
             label3.Text = "Производитель: " + proizvoditel;
             label4.Text = "Поставщик: " + postavshic;
             label5.Text = "Цена: " + price;
             label6.Text = "Единицы измерения: " + edinic_izm;
             label7.Text = "Количество на складе: " + quantity;
+            label8.Text = "Действующая скидка: " + discount + '%';
 
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
 
         }
     }

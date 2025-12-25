@@ -14,15 +14,67 @@ namespace fuckAgain
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        public string roleName { get; set;  }
+        public string fio { get; set; }
+        //public int user_id { get; set; }
+        public Form1(string roleName, string fio)
         {
-
+            this.roleName = roleName;
+            this.fio = fio;
             InitializeComponent();
+            //LoadUser();
             LoadTavar();
+            if (roleName == "Гость")
+            {
+                labelRoleName.Hide();
+                labelFio.Hide();
+                label2.Hide();
+                textBox1.Hide();
+
+                label4.Hide();
+                checkBox1.Hide();
+                checkBox2.Hide();
+                label3.Hide();
+                comboBox1.Hide();
+                button1.Hide();
+                button2.Hide();
+                button3.Hide();
+                button4.Hide();
+                
+
+
+            }
+
 
         }
+//        public void LoadUser()
+//        {
+//            using (NpgsqlConnection connection = new NpgsqlConnection(Resources.ConactionDB))
+//            {
+//                connection.Open();
+//                string query = @"SELECT user_id, public.user_role.role_pk, fio, login, password
+//	                            FROM public.user
+//	                            JOIN public.user_role on user_role.id = public.user.role_fk
+                                                  
+//";
+//                using (NpgsqlCommand command = new NpgsqlCommand(query,connection))
+//                {
+//                    using (NpgsqlDataReader reader = command.ExecuteReader())
+//                    {
+//                        while (reader.Read())
+//                        {
+
+//                        }
+//                    }
+//                }
+//            }
+//        }
         public void LoadTavar()
         {
+            flowLayoutPanel1.Controls.Clear();
+            labelRoleName.Text = roleName;
+            labelFio.Text = fio;
+            labelRoleName.Text = roleName;
             using (NpgsqlConnection conaction = new NpgsqlConnection(Resources.ConactionDB))
             {
                 conaction.Open();
@@ -41,10 +93,12 @@ namespace fuckAgain
                         while (reader.Read())
                         {
                             //int id = Convert.ToString(reader["id_artical"]);
-                            var tovar = new UserControl1();
+                            var tovar = new tovar(roleName);
+                           
                             PopulateTovarFromReader(reader, tovar);
                             tovar.Labels();
                             flowLayoutPanel1.Controls.Add(tovar);
+                            
                         }
                         flowLayoutPanel1.ResumeLayout(true);
                     }
@@ -57,7 +111,7 @@ namespace fuckAgain
             }
 
         }
-        private void PopulateTovarFromReader(NpgsqlDataReader reader, UserControl1 tovar)
+        private void PopulateTovarFromReader(NpgsqlDataReader reader, tovar tovar)
         {
             tovar.name_tovar = reader.IsDBNull(1) ? "" : reader.GetString(1);
             tovar.edinic_izm = reader.IsDBNull(2) ? null : reader.GetString(2);
@@ -80,6 +134,18 @@ namespace fuckAgain
 
 
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadTavar();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            addTovar addtovar =new addTovar();
+            flowLayoutPanel1.Controls.Clear();
+            flowLayoutPanel1.Controls.Add(addtovar);
         }
     }
 }

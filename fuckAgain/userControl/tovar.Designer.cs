@@ -1,6 +1,6 @@
 ﻿namespace fuckAgain
 {
-    partial class UserControl1
+    partial class tovar
     {
         /// <summary> 
         /// Required designer variable.
@@ -116,21 +116,23 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(754, 126);
+            this.button1.Location = new System.Drawing.Point(724, 126);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(105, 23);
             this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
+            this.button1.Text = "Редактировать";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(754, 155);
+            this.button2.Location = new System.Drawing.Point(724, 155);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(105, 23);
             this.button2.TabIndex = 10;
-            this.button2.Text = "button2";
+            this.button2.Text = "Удалить";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label8
             // 
@@ -143,7 +145,7 @@
             this.label8.Text = "label8";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // UserControl1
+            // tovar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -158,7 +160,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
-            this.Name = "UserControl1";
+            this.Name = "tovar";
             this.Size = new System.Drawing.Size(1045, 191);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
