@@ -60,6 +60,25 @@ namespace fuckAgain
         private void PopulateTovarFromReader(NpgsqlDataReader reader, UserControl1 tovar)
         {
             tovar.name_tovar = reader.IsDBNull(1) ? "" : reader.GetString(1);
+            tovar.edinic_izm = reader.IsDBNull(2) ? null : reader.GetString(2);
+            tovar.price = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
+            tovar.postavshic = reader.IsDBNull(4)? null : reader.GetString(4);
+            tovar.proizvoditel = reader.IsDBNull(5) ? null : reader.GetString(5);
+            tovar.category = reader.IsDBNull(6) ? null : reader.GetString(6);
+            tovar.discount = reader.IsDBNull(7) ? 0 : reader.GetInt32(7);
+            tovar.quantity = reader.IsDBNull(8) ? 0 : reader.GetInt32(8);
+            tovar.description = reader.IsDBNull(9) ? null : reader.GetString(9);
+
+
+
+
+
+
+
+
+
+
+
 
         }
     }
