@@ -18,5 +18,7 @@ namespace fuckAgain
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new authorization());
         }
+
+
     }
 }

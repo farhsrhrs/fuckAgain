@@ -157,6 +157,10 @@
     <EmbeddedResource Include="userControl\tovar.resx">
       <DependentUpon>tovar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="userControl\zakaz.resx">
+      <DependentUpon>zakaz.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="backupBLZ2026" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

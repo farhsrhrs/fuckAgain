@@ -115,37 +115,45 @@ namespace fuckAgain
         {
             tovar.name_tovar = reader.IsDBNull(1) ? "" : reader.GetString(1);
             tovar.edinic_izm = reader.IsDBNull(2) ? null : reader.GetString(2);
-            tovar.price = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
+            tovar.Price = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
             tovar.postavshic = reader.IsDBNull(4)? null : reader.GetString(4);
             tovar.proizvoditel = reader.IsDBNull(5) ? null : reader.GetString(5);
-            tovar.category = reader.IsDBNull(6) ? null : reader.GetString(6);
+            tovar.Category = reader.IsDBNull(6) ? null : reader.GetString(6);
             tovar.discount = reader.IsDBNull(7) ? 0 : reader.GetInt32(7);
             tovar.quantity = reader.IsDBNull(8) ? 0 : reader.GetInt32(8);
             tovar.description = reader.IsDBNull(9) ? null : reader.GetString(9);
-
-
-
-
-
-
-
-
-
-
-
+            tovar.IdArticle = reader.IsDBNull(0)? null : reader.GetString(0);
 
         }
+        public void LoadZakaz()
+        {
+            flowLayoutPanel1.Controls.Clear();
 
-        private void button1_Click(object sender, EventArgs e)
+        }
+        public void LoadTavarAdd(string ArticleTovar)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            addTovar addtovar = new addTovar(true);
+            addtovar.ArticleTovar = ArticleTovar;
+            addtovar.setAddcontrols();
+            addtovar.LoadTovarData();
+            this.flowLayoutPanel1.Controls.Add(addtovar);
+        }
+        private void button1_Click(object sender, EventArgs e)//tovar
         {
             LoadTavar();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)//addtovar
         {
-            addTovar addtovar =new addTovar();
+            addTovar addtovar = new addTovar(false);
             flowLayoutPanel1.Controls.Clear();
             flowLayoutPanel1.Controls.Add(addtovar);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
