@@ -1,4 +1,7 @@
-﻿using System;
+﻿using fuckAgain.Properties;
+using Npgsql;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,14 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using fuckAgain.Properties;
-using Npgsql;
 
 namespace fuckAgain
 {
     public partial class Form1 : Form
     {
-        public string roleName { get; set;  }
+        public string roleName { get; set; }
         public string fio { get; set; }
         //public int user_id { get; set; }
         public Form1(string roleName, string fio)
@@ -40,35 +41,35 @@ namespace fuckAgain
                 button2.Hide();
                 button3.Hide();
                 button4.Hide();
-                
+
 
 
             }
 
 
         }
-//        public void LoadUser()
-//        {
-//            using (NpgsqlConnection connection = new NpgsqlConnection(Resources.ConactionDB))
-//            {
-//                connection.Open();
-//                string query = @"SELECT user_id, public.user_role.role_pk, fio, login, password
-//	                            FROM public.user
-//	                            JOIN public.user_role on user_role.id = public.user.role_fk
-                                                  
-//";
-//                using (NpgsqlCommand command = new NpgsqlCommand(query,connection))
-//                {
-//                    using (NpgsqlDataReader reader = command.ExecuteReader())
-//                    {
-//                        while (reader.Read())
-//                        {
+        //        public void LoadUser()
+        //        {
+        //            using (NpgsqlConnection connection = new NpgsqlConnection(Resources.ConactionDB))
+        //            {
+        //                connection.Open();
+        //                string query = @"SELECT user_id, public.user_role.role_pk, fio, login, password
+        //	                            FROM public.user
+        //	                            JOIN public.user_role on user_role.id = public.user.role_fk
 
-//                        }
-//                    }
-//                }
-//            }
-//        }
+        //";
+        //                using (NpgsqlCommand command = new NpgsqlCommand(query,connection))
+        //                {
+        //                    using (NpgsqlDataReader reader = command.ExecuteReader())
+        //                    {
+        //                        while (reader.Read())
+        //                        {
+
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
         public void LoadTavar()
         {
             flowLayoutPanel1.Controls.Clear();
@@ -94,11 +95,11 @@ namespace fuckAgain
                         {
                             //int id = Convert.ToString(reader["id_artical"]);
                             var tovar = new tovar(roleName);
-                           
+
                             PopulateTovarFromReader(reader, tovar);
                             tovar.Labels();
                             flowLayoutPanel1.Controls.Add(tovar);
-                            
+
                         }
                         flowLayoutPanel1.ResumeLayout(true);
                     }
@@ -116,20 +117,57 @@ namespace fuckAgain
             tovar.name_tovar = reader.IsDBNull(1) ? "" : reader.GetString(1);
             tovar.edinic_izm = reader.IsDBNull(2) ? null : reader.GetString(2);
             tovar.Price = reader.IsDBNull(3) ? 0 : reader.GetInt32(3);
-            tovar.postavshic = reader.IsDBNull(4)? null : reader.GetString(4);
+            tovar.postavshic = reader.IsDBNull(4) ? null : reader.GetString(4);
             tovar.proizvoditel = reader.IsDBNull(5) ? null : reader.GetString(5);
             tovar.Category = reader.IsDBNull(6) ? null : reader.GetString(6);
             tovar.discount = reader.IsDBNull(7) ? 0 : reader.GetInt32(7);
             tovar.quantity = reader.IsDBNull(8) ? 0 : reader.GetInt32(8);
             tovar.description = reader.IsDBNull(9) ? null : reader.GetString(9);
-            tovar.IdArticle = reader.IsDBNull(0)? null : reader.GetString(0);
+            tovar.IdArticle = reader.IsDBNull(0) ? null : reader.GetString(0);
 
         }
         public void LoadZakaz()
         {
             flowLayoutPanel1.Controls.Clear();
+            using (NpgsqlConnection conaction = new NpgsqlConnection(Resources.ConactionDB))
+            {
+                conaction.Open();
 
+                string query = @"SELECT id_zakaz, date_zakaz, data_delivery,address_pk , fio, code_poluch, status_pk
+	FROM public.zakaz
+	JOIN address on address.id = zakaz.address_fk
+	JOIN users on users.user_id = fio_client_fk
+	Join status_zakaz on status_zakaz.id = status_zakaz_fk";
+
+                using (NpgsqlCommand command = new NpgsqlCommand(query, conaction))
+                {
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var zakaz = new zakaz();
+
+
+                            zakaz.Artical = reader.GetInt32(0);
+                            zakaz.Status = reader.GetString(5);
+                            zakaz.Address = reader.GetString(3);
+                            zakaz.DateZakaz = reader.GetString(1);
+
+                            zakaz.DateDelivery = reader.GetString(2);
+
+
+
+
+
+
+                        }
+                    }
+                }
+            }
         }
+
+
+
         public void LoadTavarAdd(string ArticleTovar)
         {
             flowLayoutPanel1.Controls.Clear();

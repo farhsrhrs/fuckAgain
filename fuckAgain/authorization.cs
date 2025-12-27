@@ -28,8 +28,8 @@ namespace fuckAgain
                 conaction.Open();
 
                 string query = @"SELECT user_id, public.user_role.role_pk, fio, login, password
-	                            FROM public.user
-	                            JOIN public.user_role on user_role.id = public.user.role_fk
+	                            FROM public.users
+	                            JOIN public.user_role on user_role.id = public.users.role_fk
 	                                WHERE login = @login AND password = @password";
                 using (NpgsqlCommand command = new NpgsqlCommand(query, conaction))
                 {
